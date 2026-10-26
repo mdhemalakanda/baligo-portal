@@ -1,0 +1,15 @@
+import { chromium } from "playwright-core";
+import { pathToFileURL } from "node:url";
+const browser = await chromium.launch({ channel: "chrome", headless: true, executablePath: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" });
+const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+const errors = [];
+page.on("pageerror", (e) => errors.push(String(e)));
+await page.goto(pathToFileURL("../documentation.html").href, { waitUntil: "load" });
+const body = await page.textContent("body");
+const checks = ["Formula", "Google Document AI", "Request quotation", "Roadmap", "checklist", "staging", "markup", "IDR"];
+const missing = checks.filter((c) => !body.includes(c));
+const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+await page.screenshot({ path: "../qa-screenshots/documentation.png", fullPage: false });
+console.log("doc sections missing:", missing.length ? missing : "none", "| overflow:", overflow + "px", "| js errors:", errors.length ? errors : "none");
+await browser.close();
+process.exit(missing.length || errors.length || overflow > 4 ? 1 : 0);

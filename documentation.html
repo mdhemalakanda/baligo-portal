@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baligo – B2B Hotel Quotation Portal · Documentation</title>
+<style>
+  :root{
+    --navy:#1c3557; --navy-2:#254772; --teal:#1e8f8f; --ink:#1e2530; --muted:#5b6675;
+    --bg:#f4f6f9; --card:#ffffff; --line:#e3e8ef; --amber-bg:#fff7e6; --amber:#8a5b00;
+    --green-bg:#e9f7ef; --green:#196b41; --red-bg:#fdecec; --red:#9b2424;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 80px}
+  header.hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 60%,#2d6a72 100%);color:#fff;padding:48px 24px 40px}
+  header.hero .wrap{padding-bottom:0}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .brand .mark{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px;border:1px solid rgba(255,255,255,.25)}
+  .brand .mark i{color:#4fd1c5;font-style:normal}
+  .brand h1{font-size:22px;margin:0;letter-spacing:-.02em}
+  .hero h2{font-size:32px;margin:0 0 8px;letter-spacing:-.02em}
+  .hero p.sub{margin:0;opacity:.85;max-width:640px}
+  .pills{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:4px 12px;font-size:12.5px}
+  nav.toc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:-26px 0 34px;box-shadow:0 6px 18px rgba(28,53,87,.08)}
+  nav.toc b{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+  nav.toc ol{margin:10px 0 0;padding-left:20px;columns:2;column-gap:36px}
+  nav.toc li{margin:3px 0}
+  nav.toc a{color:var(--navy-2);text-decoration:none}
+  nav.toc a:hover{text-decoration:underline}
+  section{margin:38px 0}
+  h3.sec{font-size:21px;margin:0 0 4px;letter-spacing:-.01em;color:var(--navy)}
+  p.lead{margin:0 0 16px;color:var(--muted)}
+  h4{margin:22px 0 8px;font-size:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:14px 0}
+  .card h4:first-child{margin-top:0}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}
+  th{background:#f0f3f8;text-align:left;padding:9px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--line)}
+  td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:#eef2f7;border:1px solid var(--line);border-radius:6px;padding:1px 6px}
+  pre{background:#122036;color:#dbe7f5;border-radius:12px;padding:16px 18px;overflow:auto;font-size:13.5px;line-height:1.6}
+  pre code{background:none;border:0;color:inherit;padding:0}
+  .note{border-left:4px solid var(--teal);background:#eef8f8;border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14px}
+  .warn{border-left:4px solid #d97706;background:var(--amber-bg);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--amber)}
+  .danger{border-left:4px solid #dc2626;background:var(--red-bg);border-radius:0 10px 10px 0;padding:12px 16px;margin:14px 0;font-size:14px;color:var(--red)}
+  .ok{color:var(--green);font-weight:600}
+  .status{display:inline-block;border-radius:999px;padding:1px 10px;font-size:12px;font-weight:600}
+  .s-done{background:var(--green-bg);color:var(--green)}
+  .s-ui{background:#e8f0fe;color:#1d4ed8}
+  .s-next{background:var(--amber-bg);color:var(--amber)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}nav.toc ol{columns:1}}
+  .kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:0 6px;background:#fff;font-size:.9em}
+  figure{margin:14px 0}
+  figure img{max-width:100%;border:1px solid var(--line);border-radius:12px;box-shadow:0 4px 14px rgba(28,53,87,.08)}
+  figcaption{font-size:12.5px;color:var(--muted);margin-top:6px}
+  footer{border-top:1px solid var(--line);margin-top:48px;padding-top:18px;color:var(--muted);font-size:13px}
+  @media print{header.hero{padding:24px} nav.toc{display:none} body{background:#fff}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brand">
+      <div class="mark">B<i>.</i></div>
+      <h1>Baligo <span style="opacity:.6;font-weight:500">· B2B Hotel Quotation Portal</span></h1>
+    </div>
+    <h2>Client Documentation</h2>
+    <p class="sub">Everything you need to understand, use and hand over the Baligo WordPress plugin —
+    the admin dashboard, the agent portal, the AI contract-import workflow, the pricing model,
+    security design and the path to production.</p>
+    <div class="pills">
+      <span class="pill">Version 0.1.0 (UI release)</span>
+      <span class="pill">WordPress 6.4+ · PHP 8.0+</span>
+      <span class="pill">React + shadcn/ui front end</span>
+      <span class="pill">Demo data — UI prototype</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <b>Contents</b>
+  <ol>
+    <li><a href="#status">What Baligo is &amp; current status</a></li>
+    <li><a href="#access">How to open the portal</a></li>
+    <li><a href="#admin">Admin dashboard guide</a></li>
+    <li><a href="#agent">Agent portal guide</a></li>
+    <li><a href="#nav-search">Navigation &amp; hotel search, explained</a></li>
+    <li><a href="#import">AI PDF contract import</a></li>
+    <li><a href="#ai">AI / OCR provider &amp; costs</a></li>
+    <li><a href="#pricing">Pricing model &amp; worked examples</a></li>
+    <li><a href="#agents">Agent accounts &amp; approvals</a></li>
+    <li><a href="#security">Security &amp; privacy design</a></li>
+    <li><a href="#settings">Settings reference</a></li>
+    <li><a href="#setup">Setup on Hostinger (staging first)</a></li>
+    <li><a href="#structure">Source-code structure</a></li>
+    <li><a href="#checklist">Requirement checklist</a></li>
+    <li><a href="#roadmap">Roadmap to production</a></li>
+    <li><a href="#faq">FAQ &amp; troubleshooting</a></li>
+  </ol>
+</nav>
+
+<!-- ================================================================== -->
+<section id="status">
+  <h3 class="sec">1 · What Baligo is &amp; current status</h3>
+  <p class="lead">A custom WordPress plugin that gives your travel company a private, professional
+  hotel-quotation workspace with two faces:</p>
+
+  <div class="grid2">
+    <div class="card">
+      <h4>🛠 Admin dashboard</h4>
+      <p>Your team manages hotels, room types, seasonal IDR net rates, inclusions, policies,
+      agents and contract imports — all through forms, no coding. Reached inside
+      <b>wp-admin → Baligo</b>.</p>
+    </div>
+    <div class="card">
+      <h4>🧳 Agent portal</h4>
+      <p>Approved travel agents log in, build a stay (hotel, room, dates, rooms, adults, child
+      ages, extra beds), see <b>USD selling prices</b> with a full breakdown, and copy a polished
+      quotation for WhatsApp or e-mail. Reached at <code>/baligo/</code> on your website.</p>
+    </div>
+  </div>
+
+  <div class="warn">
+    <b>Current release = complete UI prototype on demo data.</b> Every screen described in this
+    document is implemented and clickable. All data is realistic <em>sample</em> data, all actions
+    are simulated (honest “demo” notices are shown), and no server-side pricing, database,
+    authentication or AI processing is active yet. This is exactly what was requested for this
+    phase: <em>static UI, not dynamic</em>. Section 14 lists the backend work required to go live.
+  </div>
+
+  <p>The interface is built with <b>React 18 + TypeScript + Tailwind CSS + shadcn/ui</b>, compiled
+  by Vite, and shipped inside the plugin as ready-made files — the WordPress site needs
+  <b>no build tools</b> to run it.</p>
+</section>
+
+<!-- ================================================================== -->
+<section id="access">
+  <h3 class="sec">2 · How to open the portal</h3>
+  <table>
+    <tr><th style="width:34%">Area</th><th>Where</th></tr>
+    <tr><td>Admin dashboard</td><td><code>wp-admin → Baligo</code> (administrator account required)</td></tr>
+    <tr><td>Admin submenus</td><td>Dashboard · Hotels · Room Types · Supplier Rates · Rate History · Contract Import · Agents · Settings</td></tr>
+    <tr><td>Agent portal</td><td><code>https://your-domain/baligo/</code> (page opens the portal full-screen)</td></tr>
+    <tr><td>Agent sign-in / status screens</td><td><code>/baligo/</code> → Sign out menu, or <code>/baligo/#/agent/sign-in</code>, <code>…/pending</code>, <code>…/deactivated</code></td></tr>
+  </table>
+  <div class="note">After first activating the plugin, open <b>Settings → Permalinks → Save</b> once
+  so WordPress registers the <code>/baligo/</code> address.</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="admin">
+  <h3 class="sec">3 · Admin dashboard guide</h3>
+
+  <div class="card"><h4>Overview (dashboard home)</h4>
+    <p>Key figures (hotels, room types, active agents, contracts awaiting review), a
+    <b>“Needs attention”</b> queue that lists rate conflicts, expiring/expired/incomplete rates and
+    agent approvals, the latest rate changes, recent agent activity, a seasonal-pricing health bar
+    and quick actions. Everything links to the screen where you resolve it.</p>
+  </div>
+
+  <div class="card"><h4>Hotels</h4>
+    <p>Searchable, filterable, sortable table (status, destination). Add or edit a hotel:
+    name, destination, country, address, star category, status (active / draft / inactive),
+    description, amenities, inclusions and policies (check-in/out, cancellation, children,
+    extra bed). The hotel detail page has tabs for <b>Overview</b>, <b>Room types</b> and
+    <b>Rates</b>, and a “last updated by” trail.</p>
+  </div>
+
+  <div class="card"><h4>Room Types</h4>
+    <p>Every room type across all hotels, with an editor for: description, size (m²), bed type,
+    <b>standard and maximum occupancy</b> (adults / children / total), <b>extra-bed eligibility and
+    limits</b>, amenities, meals, and the child-policy and extra-bed-policy texts agents will see.</p>
+  </div>
+
+  <div class="card"><h4>Supplier Rates (seasonal pricing)</h4>
+    <p>Pick a hotel → room type and you get its seasons. Each seasonal rate holds:
+    season name &amp; dates, contract validity window, <b>IDR net rate per night</b> (marked
+    <em>Commercial — internal only</em>), minimum stay, <b>holiday surcharge</b> (percent + note),
+    <b>age-banded child charges</b>, extra-bed charge, inclusions and supplements. Statuses flag
+    rates as <span class="status s-done">Valid</span>
+    <span class="status" style="background:var(--amber-bg);color:var(--amber)">Expiring / Incomplete</span>
+    or <span class="status" style="background:var(--red-bg);color:var(--red)">Expired / Conflict</span>.
+    A side panel keeps the default markup, rounding rule and IDR-per-USD rate close at hand.</p>
+  </div>
+
+  <div class="card"><h4>Rate History</h4>
+    <p>A chronological audit timeline of every change — net rate, season dates, validity,
+    surcharge, markup and exchange-rate updates — with who changed what, from which value to
+    which, plus filterable comparison dialogs. (In this release the timeline shows sample data;
+    the backend phase makes it automatic.)</p>
+  </div>
+
+  <div class="card"><h4>Contract Import</h4>
+    <p>The launchpad for AI imports — see <a href="#import">section 5</a>.</p>
+  </div>
+
+  <div class="card"><h4>Agents</h4>
+    <p>All agent accounts with status badges, a <b>Pending approval</b> tab, approve / reject /
+    deactivate / reactivate flows (with confirmation dialogs), invitations, and an agent detail
+    page with an editable profile and activity trail.</p>
+  </div>
+
+  <div class="card"><h4>Settings</h4>
+    <p>Company identity, default currency (USD), <b>IDR-per-USD exchange rate</b>, default
+    <b>markup %</b>, <b>rounding rule</b>, quotation validity, date format &amp; timezone, hotel
+    pricing defaults (min stay, max child age), agent-portal display toggles, notification
+    preferences and import preferences (auto-extract, require human review, duplicate strategy).
+    Saving is validated — and in this release clearly marked as a demo action.</p>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<section id="agent">
+  <h3 class="sec">4 · Agent portal guide</h3>
+  <p class="lead">Designed mobile-first for agents who prepare quotations for their clients.</p>
+
+  <div class="card"><h4>1 · Sign in &amp; account states</h4>
+    <p>Email + password sign-in (with “forgot password” and error-state demonstrations), a
+    <b>Pending approval</b> screen shown to newly registered agents, and a
+    <b>Deactivated account</b> screen. Administrators approve accounts from the dashboard —
+    until then an agent cannot proceed.</p>
+  </div>
+
+  <div class="card"><h4>2 · Find a hotel &amp; room</h4>
+    <p>Home opens with a search launcher (destination, check-in/out, rooms, adults, children,
+    child <em>ages</em>, extra beds). Results show hotel cards with inclusions and expandable room
+    lists, each with a per-night USD price for the chosen dates. Rooms without a valid contracted
+    rate show <b>“Rate unavailable for your dates”</b> with a Request-quotation action instead of a
+    made-up price.</p>
+  </div>
+
+  <div class="card"><h4>3 · Configure the stay</h4>
+    <p>The stay screen lets the agent adjust dates (nights computed automatically), rooms, guests,
+    child ages and extra beds. Occupancy is <b>enforced visually</b> — exceeding a room type’s
+    maximum occupancy blocks pricing with a clear message. Included benefits, child policy and
+    extra-bed policy are shown from the hotel/room configuration. A live summary panel shows the
+    running total.</p>
+  </div>
+
+  <div class="card"><h4>4 · Review the quotation</h4>
+    <p>A full breakdown: room total <em>per season segment</em> (stays that cross a season show
+    each part separately), extra beds, child charges and holiday surcharges, ending in a clear USD
+    total. Inclusions, occupancy info and client-facing policies sit beside it. If a rate is
+    <b>missing, expired or unresolved</b>, the price panel is replaced by an honest
+    <b>“Request quotation”</b> action — never a fabricated price.</p>
+  </div>
+
+  <div class="card"><h4>5 · Share it</h4>
+    <p>The preview renders a polished, printable quotation document (Baligo letterhead, reference,
+    validity dates, breakdown, policies, terms) with <b>Copy text · WhatsApp · E-mail · Print</b>
+    actions. Sharing is simulated in this release; the WhatsApp/e-mail buttons demonstrate exactly
+    where delivery will hook in.</p>
+  </div>
+
+  <div class="danger"><b>Agents can never see</b> supplier net rates (IDR), markup percentages,
+  contracts, supplier names or internal notes — enforced in the interface layer and re-verified by
+  an automated check on every build (35-point UI test suite).</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="nav-search">
+  <h3 class="sec">4b · Navigation &amp; hotel search, explained</h3>
+  <p class="lead">How you move around Baligo, and exactly what the search does.</p>
+
+  <h4>Navigation</h4>
+  <table>
+    <tr><th style="width:26%">Surface</th><th>Organisation</th></tr>
+    <tr>
+      <td><b>Admin dashboard</b><br>(wp-admin → Baligo)</td>
+      <td>A navy left sidebar inside the app, grouped for scanning:
+        <b>Overview</b> (Dashboard) · <b>Inventory</b> (Hotels, Room Types) ·
+        <b>Pricing</b> (Supplier Rates, Rate History, Contract Import) ·
+        <b>Partners</b> (Agents) · <b>Configuration</b> (Settings).
+        Count badges on Contract Import and Agents show items waiting for you.
+        The same structure exists as real <b>WordPress submenus</b> under the Baligo menu, and
+        every item is also reachable from the dashboard’s quick actions and “Needs attention”
+        queue. A top bar carries the notification centre and account menu; on phones the sidebar
+        becomes a slide-out menu.</td>
+    </tr>
+    <tr>
+      <td><b>Agent portal</b><br>(<code>/baligo/</code>)</td>
+      <td>A light left sidebar organised into two groups:
+        <b>Workspace</b> (Home, Find Hotels, My Quotations) and
+        <b>Account</b> (Profile), with the agent’s identity and sign-out pinned at the bottom.
+        On mobile the sidebar becomes a hamburger sheet plus a thumb-friendly
+        <b>bottom tab bar</b> (Home · Hotels · Quotes · Profile). The top bar keeps the demo-data
+        badge and account menu.</td>
+    </tr>
+    <tr>
+      <td><b>Deep links</b></td><td>Every screen has a stable URL (hash routing, e.g.
+      <code>/baligo/#/agent/search?destination=Ubud…</code>) so views can be bookmarked and
+      shared — search filters travel in the URL.</td>
+    </tr>
+  </table>
+
+  <h4>The hotel search feature</h4>
+  <table>
+    <tr><th style="width:30%">Capability</th><th>What it does</th></tr>
+    <tr><td>Stay criteria</td><td>Destination or hotel name, check-in and check-out dates (validated: check-out must be after check-in), number of rooms, adults, children — with a per-child <b>age selector</b> (ages drive child charges later) — and extra-bed preference.</td></tr>
+    <tr><td>Linkable results</td><td>All criteria live in the URL. Refreshing, bookmarking or sending the link to a colleague reproduces the exact same results — the foundation for shareable quotation drafts.</td></tr>
+    <tr><td>Price per date</td><td>Each room shows a per-night USD price for the <em>selected</em> dates, derived night-by-night from the seasonal rates. Rooms whose demo price can’t be derived show <b>“Rate unavailable for your dates”</b> and a Request-quotation action — never a guess.</td></tr>
+    <tr><td>Sorting &amp; feedback</td><td>Recommended / price sort, result counts, friendly empty states (“no matches — try different dates”, “enter your client’s stay details”), and a visible demo-data note.</td></tr>
+    <tr><td>Hand-off</td><td>“Select” on a room carries every search criterion into the stay-configuration screen, then into the quotation and its shareable preview.</td></tr>
+  </table>
+  <div class="note">In this release search filters the built-in demo hotels and prices come from
+  the demo pricing helper. In the production build the same UI calls the server for availability
+  of contracted rates — the screens and URLs stay identical.</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="import">
+  <h3 class="sec">5 · AI PDF contract import</h3>
+  <p class="lead">Turn supplier contracts and rate sheets into structured rates — with a human
+  always in control.</p>
+
+  <h4>The four-step workflow</h4>
+  <table>
+    <tr><th style="width:22%">Step</th><th>What happens</th></tr>
+    <tr><td><b>1 · Upload</b></td><td>Drag-and-drop or browse (PDF; scanned documents supported). Simulated progress, file list with remove controls. In production the file is stored in a <b>private, non-public folder</b> — never a public URL.</td></tr>
+    <tr><td><b>2 · Review extraction</b></td><td>Side-by-side source page + extracted data: hotel info, currency, room types, seasonal rates, dates, inclusions, child &amp; extra-bed policies — each field with a <b>confidence indicator</b>. Unclear fields, <b>currency mismatches</b> (e.g. one season quoted in USD among IDR) and missing values are flagged, never guessed.</td></tr>
+    <tr><td><b>3 · Resolve issues</b></td><td>An editable review table: inline edits, uncertain values highlighted, duplicate/overlap comparisons against <em>existing</em> rates (“new IDR 2,745,000 vs existing IDR 2,640,000”), and a resolve action per warning. Saving is blocked until conflicts are handled.</td></tr>
+    <tr><td><b>4 · Approval preview</b></td><td>A summary of changes, remaining warnings and a required checkbox: <em>“I have reviewed the extracted data against the source document.”</em> Only then can the import be approved — and cancelled at any time.</td></tr>
+  </table>
+
+  <div class="note"><b>Privacy by design:</b> contract PDFs are commercially sensitive. The plan
+  stores them outside the public uploads directory (or with deny-all rules in
+  <code>.htaccess</code>/nginx), excludes them from any page caching/CDN, and shows them only to
+  logged-in administrators. The import screens state this explicitly.</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="ai">
+  <h3 class="sec">6 · AI / OCR provider &amp; ongoing costs</h3>
+  <p class="lead">This release ships the workflow UI only — no AI vendor is locked in. For the
+  production build we recommend a two-stage pipeline: an <b>OCR service</b> reads the pages
+  (including scans), then a <b>language model</b> structures the text into the editable review
+  table. Indicative options:</p>
+
+  <table>
+    <tr><th>Provider / service</th><th>Role</th><th>Indicative cost*</th><th>Notes</th></tr>
+    <tr>
+      <td><b>Google Document AI</b> <span class="status s-done">Recommended</span></td>
+      <td>OCR + table structure</td>
+      <td>≈ US$1.50 per 1,000 pages</td>
+      <td>Strong on scanned hotel rate sheets; table detection helps rate grids.</td>
+    </tr>
+    <tr>
+      <td><b>Amazon Textract</b></td>
+      <td>OCR + forms/tables</td>
+      <td>≈ $1.50/1,000 pages (text) · ≈ $50/1,000 (forms/tables)</td>
+      <td>Alternative if you prefer AWS; good accuracy on scans.</td>
+    </tr>
+    <tr>
+      <td><b>OpenAI GPT-4o mini</b></td>
+      <td>Structuring (JSON) from OCR text</td>
+      <td>≈ $0.05–0.20 per contract</td>
+      <td>Cheap, fast; pairs with any OCR.</td>
+    </tr>
+    <tr>
+      <td><b>Anthropic Claude</b></td>
+      <td>Structuring (JSON), or direct vision extraction</td>
+      <td>≈ $0.05–0.30 per contract</td>
+      <td>Handles messy scanned layouts well; direct page-image extraction possible.</td>
+    </tr>
+    <tr>
+      <td><b>Tesseract OCR</b> (self-hosted)</td>
+      <td>OCR only</td>
+      <td>Free</td>
+      <td>No per-page cost, but noticeably lower accuracy on scanned contracts; more manual review.</td>
+    </tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted)">*List-price ballparks as of early 2026 — please
+  verify current pricing on each provider’s pricing page before go-live.</p>
+
+  <div class="card"><h4>Expected ongoing cost for Baligo</h4>
+    <p>A typical hotel contract is 5–30 pages. At the recommended stack
+    (Document AI + GPT-4o mini) that is roughly <b>US$0.02–0.15 per contract</b>. Even importing
+    200 contracts a month would stay under ~$10/month plus the LLM/API usage — the larger running
+    cost is human review time, which the approval workflow is designed to make quick.</p>
+    <p><b>Key management:</b> provider API keys will be stored as WordPress constants in
+    <code>wp-config.php</code> (outside the database and the codebase), never in the browser, and
+    never committed to the repository.</p>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<section id="pricing">
+  <h3 class="sec">7 · Pricing model &amp; worked examples</h3>
+
+  <div class="card">
+    <h4>The formula</h4>
+    <pre><code>USD selling rate (per night) = IDR net rate ÷ IDR-per-USD × (1 + markup %)
+                             → rounded by the configured rounding rule
+                               (e.g. round up to next $1)</code></pre>
+    <p><b>Worked example</b> (demo settings: 16,395 IDR/USD, 20% markup, round up to $1):</p>
+    <pre><code>IDR 2,050,000 ÷ 16,395 × 1.20 = $150.05  →  rounded up to $151.00 per night</code></pre>
+    <p>These are exactly the numbers the agent screens show, so the UI, this document and the
+    future backend engine agree on one definition.</p>
+  </div>
+
+  <h4>Rules applied to every quotation</h4>
+  <table>
+    <tr><th style="width:30%">Rule</th><th>How it behaves</th></tr>
+    <tr><td>Per-night, season-aware</td><td>Each night is priced with the season covering that date. A stay crossing seasons (e.g. 6 nights low season + 2 nights high season) shows <b>one line per season segment</b> in the breakdown.</td></tr>
+    <tr><td>Contract validity</td><td>Nights beyond a contract’s validity make the rate <em>expired</em> → “Request quotation”, no price invented.</td></tr>
+    <tr><td>Rooms</td><td>Room lines multiply by the number of rooms.</td></tr>
+    <tr><td>Children</td><td>Per-room age bands (e.g. 0–3.99 free, 4–11.99 a charge, 12+ adult rules) come from the seasonal rate; ages are entered per child on the agent side.</td></tr>
+    <tr><td>Extra beds</td><td>Only where the room type is eligible, up to its maximum; charged per night with the configured amount.</td></tr>
+    <tr><td>Holiday surcharge</td><td>Percentage uplift on affected nights as configured per season (e.g. 21% during Nyepi week), shown as its own breakdown line.</td></tr>
+    <tr><td>Occupancy limits</td><td>Adults + children are checked against the room type’s maximum occupancy before any price is shown.</td></tr>
+    <tr><td>Rounding</td><td>Applied to the final selling rate per night: none / up to $0.50 / up to $1 / nearest $1.</td></tr>
+  </table>
+
+  <h4>“Request quotation” states</h4>
+  <p>Instead of guessing, the agent portal shows an explicit state and a request button when a
+  rate is: <b>missing</b> (no season covers the dates), <b>expired</b> (contract validity passed),
+  <b>unresolved</b> (conflict flagged in a contract review), when <b>occupancy is exceeded</b>,
+  when the <b>date range is invalid</b>, or when <b>more information</b> is needed.</p>
+
+  <div class="warn">In this release the numbers come from a deterministic <em>demo</em> helper that
+  implements the formula above over the mock rates — it is intentionally not wired to any
+  persistence or server computation. The production engine (server-side PHP) implements the same
+  formula with the real database.</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="agents">
+  <h3 class="sec">8 · Agent accounts &amp; approvals</h3>
+  <table>
+    <tr><th style="width:30%">Flow</th><th>Designed behaviour</th></tr>
+    <tr><td>Registration → approval</td><td>New agents land on “Approval pending”. An administrator approves or rejects them from <b>Agents → Pending approval</b>. Rejected/deactivated agents see a dedicated screen with a support contact.</td></tr>
+    <tr><td>Password reset</td><td>“Forgot password” flow on the sign-in screen (UI demonstrated); production will send a signed, time-limited reset link by e-mail.</td></tr>
+    <tr><td>Deactivation</td><td>Administrators deactivate with a confirmation dialog; the agent’s next visit shows the deactivated screen. Reactivation restores access.</td></tr>
+    <tr><td>Roles</td><td>Planned capabilities: <b>Administrator</b> (everything), <b>Rate manager</b> (hotels/rates/import, optional), <b>Agent</b> (portal only — no wp-admin, no net-rate data).</td></tr>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<section id="security">
+  <h3 class="sec">9 · Security &amp; privacy design</h3>
+  <table>
+    <tr><th style="width:32%">Concern</th><th>Design</th></tr>
+    <tr><td>Net rates &amp; contracts stay admin-only</td><td>Agent screens never render net rates, markup, supplier names or contracts — enforced in the interface layer and re-checked by an automated grep test on every build.</td></tr>
+    <tr><td>Server-side authority</td><td>Production calculations, approvals and data access run in PHP with capability checks (<code>current_user_can()</code>) and nonces — the browser never decides what an agent may see.</td></tr>
+    <tr><td>Shared database</td><td>One set of custom tables (hotels, rooms, seasons, rates, agents, quotations, audit log) with typed columns and indexed lookups; quotations stored per agent.</td></tr>
+    <tr><td>Private documents</td><td>Contract PDFs stored outside the public uploads path (or deny-all rules), served only through a permission-checked PHP endpoint.</td></tr>
+    <tr><td>Cache exclusion</td><td>The app pages and REST endpoints are sent with <code>no-cache</code> for logged-in users and excluded from Hostinger/LiteSpeed caching so private pages are never cached publicly.</td></tr>
+    <tr><td>API keys</td><td>OCR/LLM keys live as constants in <code>wp-config.php</code>; never in JS, never in the DB, never in the repo.</td></tr>
+    <tr><td>Ownership</td><td>All accounts, licences and code are contracted to you; the plugin is self-contained under your WordPress install.</td></tr>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<section id="settings">
+  <h3 class="sec">10 · Settings reference</h3>
+  <table>
+    <tr><th style="width:34%">Setting</th><th>Effect</th></tr>
+    <tr><td>Company name / email / phone</td><td>Shown on quotations and the portal footer.</td></tr>
+    <tr><td>Default currency</td><td>USD selling currency for all quotations.</td></tr>
+    <tr><td>IDR per USD</td><td>Exchange rate used by the pricing formula; date-stamped, changeable any time without coding.</td></tr>
+    <tr><td>Default markup %</td><td>Applied to net rates to produce selling prices (per-season overrides supported in the rate editor’s plan).</td></tr>
+    <tr><td>Rounding rule</td><td>None / up to $0.50 / up to $1 / nearest $1.</td></tr>
+    <tr><td>Quotation validity</td><td>How long an issued quotation stays valid (default 14 days).</td></tr>
+    <tr><td>Date format &amp; timezone</td><td>Used across the portal and printed documents.</td></tr>
+    <tr><td>Pricing defaults</td><td>Default minimum stay and maximum child age when a contract omits them.</td></tr>
+    <tr><td>Agent portal display</td><td>Toggles for tax breakdown, inclusions and validity dates on agent screens.</td></tr>
+    <tr><td>Notifications</td><td>Email alerts for new agents, finished imports, expiring rates, weekly digest.</td></tr>
+    <tr><td>Import preferences</td><td>Auto-extract, require human review (recommended on), duplicate strategy (flag / overwrite / skip).</td></tr>
+    <tr><td>Access &amp; privacy</td><td>Who may approve imports, retention for inactive agents, internal notes.</td></tr>
+  </table>
+</section>
+
+<!-- ================================================================== -->
+<section id="setup">
+  <h3 class="sec">11 · Setup on Hostinger (staging first)</h3>
+  <div class="card">
+    <h4>Install</h4>
+    <ol style="margin:6px 0 0 18px">
+      <li>Copy the <code>baligo</code> folder into <code>wp-content/plugins/</code> (or upload the plugin ZIP via <b>Plugins → Add New → Upload</b>).</li>
+      <li>Activate <b>Baligo – B2B Hotel Quotation Portal</b> in <b>Plugins</b>.</li>
+      <li>Open <b>Settings → Permalinks → Save Changes</b> once (registers <code>/baligo/</code>).</li>
+      <li>Open <b>wp-admin → Baligo</b> — the dashboard loads with demo data.</li>
+      <li>Visit <code>https://your-domain/baligo/</code> — the agent portal loads.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h4>Editing the front end (developers)</h4>
+    <pre><code>cd wp-content/plugins/baligo/app
+npm install          # once
+npm run dev          # live dev server (#/admin and #/agent routes)
+npm run build        # rebuilds assets/ that WordPress serves
+npm run smoke        # 35-point UI + mobile-overflow test (headless Chrome)
+npm run visual       # interaction tests + screenshots → qa-screenshots/</code></pre>
+    <p>The compiled <code>assets/js/baligo.js</code> and <code>assets/css/baligo.css</code> are
+    part of the plugin — the live site does <b>not</b> need Node.</p>
+  </div>
+  <div class="note"><b>Deployment order:</b> Hostinger staging site → sample-contract import test →
+  your sign-off → production. Always keep a database backup before plugin updates.</div>
+</section>
+
+<!-- ================================================================== -->
+<section id="structure">
+  <h3 class="sec">12 · Source-code structure</h3>
+  <pre><code>baligo/
+├── baligo.php              ← WordPress plugin: menus, submenus, /baligo/ page, asset loading
+├── documentation.html      ← this document
+├── readme.txt
+├── assets/                 ← compiled SPA (served by WordPress; no build needed)
+│   ├── js/baligo.js
+│   ├── css/baligo.css
+│   └── assets/…            ← bundled Inter font files
+├── qa-screenshots/         ← automated QA screenshots (desktop / mobile / wp-admin)
+└── app/                    ← front-end source
+    ├── src/data/mock.ts     ← ALL demo data lives here (replaced by the API later)
+    ├── src/data/pricing.ts  ← demo pricing helper (documents the real formula)
+    ├── src/components/ui/       ← shadcn/ui primitives (22 components)
+    ├── src/components/shared/   ← Baligo design system (tables, badges, forms…)
+    ├── src/components/admin|agent/  ← application shells
+    ├── src/pages/admin/     ← 13 admin screens
+    ├── src/pages/agent/     ← 8 agent screens
+    └── scripts/             ← QA harnesses (smoke, embedded, visual)</code></pre>
+</section>
+
+<!-- ================================================================== -->
+<section id="checklist">
+  <h3 class="sec">13 · Requirement checklist</h3>
+  <table>
+    <tr><th>Requirement</th><th style="width:15%">Status</th><th>Where</th></tr>
+    <tr><td>Agent login, admin approval, password reset, deactivation</td><td><span class="status s-ui">UI done</span></td><td>Agent sign-in / pending / deactivated screens; admin Agents</td></tr>
+    <tr><td>Select hotel, room, dates, rooms, adults, child ages, extra beds</td><td><span class="status s-ui">UI done</span></td><td>Agent search + stay configuration</td></tr>
+    <tr><td>USD selling rates, total cost, supplements breakdown</td><td><span class="status s-ui">UI done</span></td><td>Quotation review &amp; preview</td></tr>
+    <tr><td>Inclusions, occupancy limits, child &amp; extra-bed policies</td><td><span class="status s-ui">UI done</span></td><td>Stay config + quotation pages</td></tr>
+    <tr><td>Copy quotations for WhatsApp / e-mail</td><td><span class="status s-ui">UI done</span></td><td>Quotation preview actions</td></tr>
+    <tr><td>Mobile-friendly portal</td><td><span class="status s-done">Tested</span></td><td>0 px overflow at 375 px on all screens</td></tr>
+    <tr><td>Agents never see net rates / markup / contracts</td><td><span class="status s-done">Enforced</span></td><td>Interface separation + automated check</td></tr>
+    <tr><td>Manage hotels, rooms, IDR net rates, inclusions</td><td><span class="status s-ui">UI done</span></td><td>Hotels / Room Types / Supplier Rates</td></tr>
+    <tr><td>Seasons, validity, holiday surcharges, minimum stays</td><td><span class="status s-ui">UI done</span></td><td>Rate editor</td></tr>
+    <tr><td>Child charges &amp; extra-bed rules per room</td><td><span class="status s-ui">UI done</span></td><td>Room editor + rate editor age bands</td></tr>
+    <tr><td>Exchange rate, markup, rounding configuration</td><td><span class="status s-ui">UI done</span></td><td>Settings + rates side panel</td></tr>
+    <tr><td>Manage agents &amp; rate-change history</td><td><span class="status s-ui">UI done</span></td><td>Agents + Rate History</td></tr>
+    <tr><td>Update everything without coding</td><td><span class="status s-ui">UI done</span></td><td>All admin screens are forms/dialogs</td></tr>
+    <tr><td>AI PDF upload incl. scans; editable review; approval before publishing</td><td><span class="status s-ui">UI done</span></td><td>4-step Contract Import wizard</td></tr>
+    <tr><td>Flag unclear data &amp; currency mismatches; compare with existing; block duplicates/conflicts</td><td><span class="status s-ui">UI done</span></td><td>Wizard steps 2–3</td></tr>
+    <tr><td>PDFs kept private</td><td><span class="status s-ui">Designed</span></td><td>Privacy note in wizard; storage plan in §9</td></tr>
+    <tr><td>Nightly pricing incl. season-crossing stays; child/extra-bed/holiday charges; occupancy enforcement</td><td><span class="status s-ui">Demo logic</span></td><td>Agent pricing helper (per-night, per-season) + stay validation</td></tr>
+    <tr><td>“Request quotation” for missing / expired / unresolved rates</td><td><span class="status s-ui">UI done</span></td><td>Quotation states panel</td></tr>
+    <tr><td>Shared DB, server-side calculations, access controls</td><td><span class="status s-next">Next phase</span></td><td>See roadmap §14</td></tr>
+    <tr><td>Plugin ZIP, training video, staging deployment</td><td><span class="status s-next">Next phase</span></td><td>Produced at delivery sign-off</td></tr>
+  </table>
+  <p style="font-size:13px;color:var(--muted)"><b>Legend:</b>
+  <span class="status s-ui">UI done</span> implemented and clickable with demo data ·
+  <span class="status s-done">Tested/Enforced</span> verified by automated checks ·
+  <span class="status s-next">Next phase</span> requires the backend build.</p>
+</section>
+
+<!-- ================================================================== -->
+<section id="roadmap">
+  <h3 class="sec">14 · Roadmap to production</h3>
+  <div class="card">
+    <h4>Phase 2 — backend integration (the “dynamic” build)</h4>
+    <ol style="margin:6px 0 0 18px">
+      <li><b>Data layer:</b> custom DB tables + REST endpoints (agents, hotels, rooms, seasons, rates, quotations, audit log) — the UI was built so every screen maps 1-to-1 to these.</li>
+      <li><b>Auth:</b> agent accounts on custom tables or WP users with an “agent” role; admin approval workflow; server-side password reset e-mails; session/nonce protection.</li>
+      <li><b>Pricing engine (PHP):</b> implements §7 server-side — per-night season lookups, child bands, extra beds, surcharges, rounding, validity and conflict checks; results stored with each quotation.</li>
+      <li><b>AI import:</b> Document AI (or Textract) + LLM structuring behind the Step-2 UI; private file storage; confidence + warning flags from real analysis.</li>
+      <li><b>Sharing:</b> real “copy”, WhatsApp deep links and e-mail dispatch (via your SMTP); optional PDF export.</li>
+      <li><b>Hardening:</b> capability checks, nonces, rate limiting, cache exclusions, backups.</li>
+      <li><b>Delivery:</b> signed plugin ZIP, source handover, staging validation with your sample contracts, short training video, bug-fix window.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================================================================== -->
+<section id="faq">
+  <h3 class="sec">15 · FAQ &amp; troubleshooting</h3>
+  <div class="card"><h4>The /baligo/ page shows my theme’s 404.</h4>
+    <p>Open <b>Settings → Permalinks → Save Changes</b>. This flushes WordPress’s rewrite rules
+    and registers the portal address (done automatically on activation, but worth repeating after
+    migrations).</p></div>
+  <div class="card"><h4>The dashboard content looks squeezed inside wp-admin.</h4>
+    <p>The app is designed for the full content width and renders its own sidebar next to the WP
+    menu. Hard-refresh the page (Ctrl/Cmd + Shift + R) so the browser picks up the newest
+    CSS/JS.</p></div>
+  <div class="card"><h4>Are the prices real?</h4>
+    <p>No — every figure is demo data labelled as such, generated by the documented formula over
+    sample hotels. Nothing is stored or sent. This is intentional for the UI phase.</p></div>
+  <div class="card"><h4>Can agents change rates?</h4>
+    <p>No. The agent portal is read-only for pricing: agents compose and share quotations; all
+    rate management happens in wp-admin. Server-side capability checks will enforce this in the
+    production build.</p></div>
+  <div class="card"><h4>What happens when a contract expires?</h4>
+    <p>Stays touching expired dates lose their price and show the honest <b>Request
+    quotation</b> state; the admin dashboard lists expiring rates in “Needs attention” before it
+    happens.</p></div>
+</section>
+
+<footer>
+  Baligo – B2B Hotel Quotation Portal · documentation for version 0.1.0 (UI release) ·
+  Generated 26 October 2026 · All product names and provider prices are indicative; verify before
+  purchase.
+</footer>
+
+</div>
+</body>
+</html>

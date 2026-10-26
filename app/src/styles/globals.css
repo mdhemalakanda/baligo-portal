@@ -1,0 +1,239 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+@import "react-day-picker/style.css";
+
+/*
+ * Baligo design tokens — shadcn/ui structure on Tailwind v4.
+ * Primary: deep navy. Accent: teal/emerald used sparingly.
+ */
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.975 0.004 250);
+  --foreground: oklch(0.24 0.03 255);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.03 255);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.03 255);
+
+  --primary: oklch(0.34 0.07 256);          /* deep navy */
+  --primary-foreground: oklch(0.98 0.01 250);
+
+  --secondary: oklch(0.955 0.008 250);
+  --secondary-foreground: oklch(0.3 0.04 256);
+
+  --muted: oklch(0.955 0.008 250);
+  --muted-foreground: oklch(0.52 0.02 255);
+
+  --accent: oklch(0.94 0.03 200);
+  --accent-foreground: oklch(0.3 0.05 230);
+
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0.01 250);
+
+  --border: oklch(0.9 0.01 250);
+  --input: oklch(0.88 0.012 250);
+  --ring: oklch(0.5 0.1 255);
+
+  /* Baligo brand extras */
+  --teal: oklch(0.62 0.11 195);
+  --teal-foreground: oklch(0.98 0.02 195);
+  --success: oklch(0.58 0.13 160);
+  --warning: oklch(0.72 0.15 75);
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-teal: var(--teal);
+  --color-teal-foreground: var(--teal-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: oklch(0.34 0.07 256 / 0.18);
+  }
+}
+
+@media print {
+  body {
+    background: #fff;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Embedded (wp-admin) mode                                            */
+/* The plugin marks its bridge container with .baligo-embedded.         */
+/* Offset sticky elements below the fixed WP admin bar (32px).          */
+/* ------------------------------------------------------------------ */
+:root {
+  /* Total height of fixed chrome above page content (topbar only standalone). */
+  --baligo-header-h: 64px;
+}
+.baligo-embedded {
+  --baligo-header-h: 96px; /* WP admin bar (32px) + Baligo topbar (64px) */
+}
+@media (max-width: 782px) {
+  .baligo-embedded {
+    --baligo-header-h: 110px; /* WP admin bar 46px + Baligo topbar 64px */
+  }
+}
+
+.baligo-embedded .baligo-sidebar {
+  top: 32px;
+  height: calc(100vh - 32px);
+}
+.baligo-embedded .baligo-topbar {
+  top: 32px;
+}
+
+/* Radix portals render to <body>, which sits under the fixed WP admin menu
+   (z-index 9990). Lift every popper above ALL wp-admin chrome. */
+.baligo-embedded [data-radix-popper-content-wrapper] {
+  z-index: 100000 !important;
+}
+.baligo-embedded [data-sonner-toaster] {
+  z-index: 100000 !important;
+}
+
+/* wp-admin colours every <a> via an unlayered rule in common.css. Unlayered
+   styles beat Tailwind's @layer utilities, so anchor-buttons and links inside
+   the app render in WP's link blue instead of the app palette. Re-assert the
+   app's anchor colours here (also unlayered) so they win the cascade. */
+.baligo-embedded a {
+  color: var(--color-foreground);
+}
+.baligo-embedded a:hover {
+  color: var(--color-secondary-foreground); /* matches outline/ghost hover */
+}
+.baligo-embedded a.bg-primary,
+.baligo-embedded a.bg-primary:hover {
+  color: var(--color-primary-foreground);
+}
+.baligo-embedded a.bg-teal,
+.baligo-embedded a.bg-teal:hover {
+  color: var(--color-teal-foreground);
+}
+.baligo-embedded a.bg-destructive,
+.baligo-embedded a.bg-destructive:hover {
+  color: var(--color-destructive-foreground);
+}
+.baligo-embedded a.text-primary,
+.baligo-embedded a.text-primary:hover {
+  color: var(--color-primary);
+}
+.baligo-embedded a.text-muted-foreground,
+.baligo-embedded a.text-muted-foreground:hover {
+  color: var(--color-muted-foreground);
+}
+.baligo-embedded a.text-foreground,
+.baligo-embedded a.text-foreground:hover {
+  color: var(--color-foreground);
+}
+
+@media (max-width: 782px) {
+  /* WP collapses the admin bar to 46px on small screens */
+  .baligo-embedded .baligo-sidebar {
+    top: 46px;
+    height: calc(100vh - 46px);
+  }
+  .baligo-embedded .baligo-topbar {
+    top: 46px;
+  }
+}
+
+/* Agent portal on the frontend: WP shows the admin bar to logged-in users. */
+body.admin-bar.baligo-agent-portal {
+  --baligo-header-h: 96px;
+}
+body.admin-bar.baligo-agent-portal header.sticky {
+  top: 32px;
+}
+body.admin-bar.baligo-agent-portal .baligo-agent-sidebar {
+  top: 32px;
+  height: calc(100vh - 32px);
+}
+@media (max-width: 782px) {
+  body.admin-bar.baligo-agent-portal {
+    --baligo-header-h: 110px;
+  }
+  body.admin-bar.baligo-agent-portal header.sticky {
+    top: 46px;
+  }
+  body.admin-bar.baligo-agent-portal .baligo-agent-sidebar {
+    top: 46px;
+    height: calc(100vh - 46px);
+  }
+}
+
+/* Remove Safari/WebKit's native search decorations — they overlap the
+   custom magnifier icon in the shared SearchInput. */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+@layer utilities {
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+
+  /* Numeric emphasis for prices — slightly tighter, tabular */
+  .amount {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /* Long hotel / company names truncate cleanly in tables */
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
